@@ -1,0 +1,335 @@
+{% load static %}
+<html lang="en">
+<head>
+  <link type="text/css" rel="stylesheet" href="{% static 'shop/css/main.css' %}"/>
+  <link type="text/css" rel="stylesheet" href="{% static 'shop/css/style.css' %}"/>
+  <link type="text/css" rel="stylesheet" href="{% static 'shop/css/bootstrap.min.css' %}"/>
+  <link type="text/css" rel="stylesheet" href="{% static 'shop/css/nouislider.min.css' %}"/>
+  <link type="text/css" rel="stylesheet" href="{% static 'shop/css/slick-theme.css' %}"/>
+  <link type="text/css" rel="stylesheet" href="{% static 'shop/css/slick.css' %}"/>
+  <link rel="stylesheet" href="{% static 'ecommerce/css/font-awesome.min.css' %}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <script src="{% static 'shop/js/panier.js' %}"></script>
+    <script src="{% static 'shop/js/jquery.min.js' %}"></script>
+    <script src="{% static 'shop/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'shop/js/slick.min.js' %}"></script>
+    <script src="{% static 'shop/js/nouislider.min.js' %}"></script>
+    <script src="{% static 'shop/js/jquery.zoom.min.js' %}"></script>
+    <script src="{% static 'shop/js/main.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+<script src="https://kit.fontawesome.com/c9f5871d83.js" crossorigin="anonymous"></script>
+
+
+<script defer type="text/javascript">
+
+user = '{{ request.user }}'
+
+function getToken(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+var csrftoken = getToken('csrftoken');
+
+
+function getCookie(name){
+  var cookieArr = document.cookie.split(";");
+
+  // Loop through the array elements
+  for(var i = 0; i < cookieArr.length; i++) {
+    var cookiePair = cookieArr[i].split("=");
+
+    /* Removing whitespace at the beginning of the cookie name
+    and compare i with the given string */
+    if(name==cookiePair[0].trim()){
+      // Decode the cookie value and return
+      return decodeURIComponent(cookiePair[1]);
+    }
+  }
+
+  // Return null if not found
+  return null;
+}
+
+var panier = JSON.parse(getCookie('panier'));
+
+if( panier == undefined){
+  panier = {};
+  console.log("panier cree");
+  document.cookie = "panier=" + JSON.stringify(panier) + ";domain=;path=/";
+}
+
+console.log('panier', panier);
+
+</script>
+
+
+<script>
+
+  // Get the <select> element
+  var categorySelect = document.getElementById("category-select");
+  // Add an event listener for the change event
+  categorySelect.addEventListener("change", function() {
+    // Get the selected option value
+    var selectedCategory = categorySelect.value;
+    // Redirect to the selected category's page
+    if (selectedCategory !== "0") {
+      window.location.href = "/category_products/" + selectedCategory + "/";
+    }
+  });
+</script>
+
+</head>
+<body>
+  <header>
+    <!-- TOP HEADER -->
+    <div id="top-header">
+      <div class="container">
+        <ul class="header-links pull-left">
+          <li><a href="https://wa.me/50946928042"><i class="fa fa-whatsapp"></i>+509 4692-8042</a></li>
+          <li><a href="mailto:louisjeanaderson2016@gmail.com"><i class="fa fa-envelope-o"></i> louisjeananderson2016@gmail.com</a></li>
+          <li><a href="https://maps.app.goo.gl/kUVfYKpKLh77Gb2c7"><i class="fa fa-map-marker"></i> Fontamara27, Rue St.Michel.prolonger, #52Bis</a></li>
+        </ul>
+        <ul class="header-links pull-right">
+          {% if request.user.is_authenticated %}
+          <a href="{% url 'mon_compte' %}"><i class="fa fa-Dollar"></i>Mon Compte</a> . 
+          <li><a href="{% url 'login' %}"><i class="fa fa-user-o"></i> </a>  
+            <a href="{% url 'logout' %}">Deconnecter</a>
+            {% else %}
+            <a href="{% url 'login' %}"><i class="fa fa-user-o"></i>connecter</a>
+            {% endif %}</li>
+        </ul>
+      </div>
+    </div>
+
+   
+    <!-- /TOP HEADER -->
+    <!-- MAIN HEADER -->
+    <div id="header">
+      <!-- container -->
+      <div class="container">
+        <!-- row -->
+        <div class="row">
+          <!-- LOGO --> 
+          <div class="col-md-3">
+            <div class="header-logo">
+              <a href="{% url 'home' %}" class="logo">
+                <img src="{% static 'shop/img/logo.png' %}" alt="Logo">
+              </a>
+            </div>
+          </div>
+          <!-- /LOGO -->
+          <!-- SEARCH BAR -->
+          <div class="col-md-6">
+            <div class="header-search">
+              <form>
+                <select id="category-select" class="input-select">
+                  <option value="0">Toutes les catégories</option>
+                  <option value="Smartphone">Smartphones</option>
+                  <option value="laptop">Laptops</option>
+                  <option value="Mécanique">Véhicules</option>
+                  <option value="tenis">Tenis</option>
+                  
+                <input type="search" placeholder="Entrez le nom du produit" name="item-name" class="input">
+                <button class="search-btn">Search</button>
+              </form>
+            </div>
+          </div>
+          <!-- /SEARCH BAR -->
+          <!-- ACCOUNT -->
+          <div class="col-md-3 clearfix">
+            <div class="header-ctn">
+              <!-- Wishlist -->
+             
+
+              <!-- /Wishlist -->
+              <!-- Cart -->
+             
+              <div class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                  <a href="{% url 'panier' %}"><i id="fa-shopping" class="fa fa-shopping-cart"></i>
+
+                  <span>Panier</span>
+                  
+                  <p id="total-panier">{{ nombre_article }}</p>
+                  
+                </a>
+                <div class="cart-dropdown">
+                  
+                  <div class="cart-btns">
+                   
+                  </div>
+                </div>
+              </div>
+             
+              <!-- /Cart -->
+              
+            </div>
+          </div>
+          <!-- /ACCOUNT -->
+        </div>
+        <!-- row -->
+      </div>
+      <!-- container -->
+    </div>
+    <!-- /MAIN HEADER -->
+  </header>
+  <!-- /HEADER -->
+  
+       
+      </div>
+      <!-- /responsive-nav -->
+    </div>
+    <!-- /container -->
+    <div id="responsive-nav">
+  <!-- /NAVIGATION -->
+
+  <!-- BREADCRUMB -->
+  <div id="breadcrumb"  class="section">
+    <!-- container -->
+    <div class="container">
+      <!-- row -->
+      <div class="row">
+        <div class="col-md-12">
+          <h3 class="breadcrumb-header"></h3>
+          <ul class="breadcrumb-tree">
+            <li><a href="{% url 'home' %}">Accueil</a></li>
+            <li><a href="{% url 'category_products' 'Smartphone' %}">Smartphones</a></li>
+            <li><a href="{% url 'category_products' 'Mécanique' %}">Véhicule</a></li>
+            <li><a href="{% url 'category_products' 'laptop' %}">laptop</a></li>
+            <li class="active">Blank</li>
+          </ul>
+        </div>
+      </div>
+      <!-- /row -->
+    </div>
+    <!-- /container -->
+  </div>
+  <!-- /BREADCRUMB -->
+
+  
+       
+      </nav>
+            {% for message in messages %}
+            <h3>{{ message }}</h3>
+            {% endfor %}
+        </div>
+        {% block content %} {% endblock %}
+    </div>
+   <!-- FOOTER -->
+<footer id="footer">
+  <!-- top footer -->
+  <div class="section">
+    <!-- container -->
+    <div class="container">
+      <!-- row -->
+      <div class="row">
+        <div class="col-md-3 col-xs-6">
+          <div class="footer">
+            <h3 class="footer-title">A Propos</h3>
+            <p>Nous sommes une entreprise jeune et dynamique, née de la passion et de la vision de notre fondateur, Anderson Louis Jean. Notre aventure a commencé il y a quelques années lorsque Anderson Louis Jean a décidé de créer un espace en ligne pour les amateurs de technologie et de mobilité pourraient trouver des produits de haute qualité à des prix abordables.</p>
+            <ul class="footer-links">
+              <li><a href="https://wa.me/50946928042"><i class="fa fa-whatsapp"></i>+509 4692-8042</a></li>
+              <li><a href="mailto:louisjeanaderson2016@gmail.com"><i class="fa fa-envelope-o"></i> louisjeananderson2016@gmail.com</a></li>
+              <li><a href="https://maps.app.goo.gl/kUVfYKpKLh77Gb2c7"><i class="fa fa-map-marker"></i> Fontamara27, Rue St.Michel.prolonger, #52Bis</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-3 col-xs-6">
+          <div class="footer">
+            <h3 class="footer-title">Categories</h3>
+            <ul class="footer-links">
+              <li><a href="{% url 'category_products' 'Mécanique' %}">Véhicule</a></li>
+              <li><a href="{% url 'category_products' 'laptop' %}">Laptops</a></li>
+              <li><a href="{% url 'category_products' 'Smartphone' %}">Smartphones</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="clearfix visible-xs"></div>
+        <div class="col-md-3 col-xs-6">
+          <div class="footer">
+            <h3 class="footer-title">Information</h3>
+            <ul class="footer-links">
+              <li><a href="{% url 'qui_sommes_nous' %}">Qui Sommes Nous</a></li>
+              <li><a href="{% url 'contact' %}">Contact Nous</a></li>
+              <li><a href="{% url 'terms_conditions' %}">Terms & Conditions</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-3 col-xs-6">
+          <div class="footer">
+            <h3 class="footer-title">Service</h3>
+            <ul class="footer-links">
+              <li><a href="{% url 'vos_commandes' %}">Suivre vos commande</a></li>
+              <li><a href="{% url 'mon_compte' %}">Mon Compte</a></li>
+              <li><a href="{% url 'aide' %}">Aide</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- bottom footer -->
+  <div id="bottom-footer" class="section">
+    <div class="container">
+      <!-- row -->
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <ul class="footer-payments">
+            <li><a href="#"><i class="fab fa-cc-visa"></i></a></li>
+            <li><a href="#"><i class="fa fa-credit-card"></i></a></li>
+            <li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
+            <li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
+            <li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
+            <li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
+          </ul>
+          <span class="copyright">
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Dévloppeur Anderson Louis Jean <i class="fa fa-heart-o" aria-hidden="true"></i>  <a href="mailto:louisjeanaderson2016@gmail.com" target="_blank">@Sage</a>
+          <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+</body>
+{% block js %}
+<script src="{% static 'shop/js/panier.js' %}"></script>
+<script>
+  // Get the <select> element
+  var categorySelect = document.getElementById("category-select");
+
+  // Add an event listener for the change event
+  categorySelect.addEventListener("change", function() {
+    // Get the selected option value
+    var selectedCategory = categorySelect.value;
+
+    // Redirect to the selected category's page
+    if (selectedCategory !== "0") {
+      window.location.href = "/category_products/" + selectedCategory + "/";
+    }
+  });
+</script>
+{% endblock %}
+</html>

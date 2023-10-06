@@ -1,0 +1,171 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+  <script src="https://kit.fontawesome.com/c9f5871d83.js" crossorigin="anonymous"></script>
+{% block content %}
+{% load static %}
+{% for message in messages %}
+<span style="color: red;"><strong>{{ message }}</strong></span>
+{% endfor %}
+
+<style>
+.divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
+}
+.h-custom {
+height: calc(100% - 73px);
+}
+@media (max-width: 450px) {
+.h-custom {
+height: 100%;
+}
+}
+p{
+  color: rgb(199, 209, 185);
+}
+label{
+  color: rgb(199, 209, 185);
+}
+a{
+  color: rgb(199, 209, 185);
+}
+</style>
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+  <script src="https://kit.fontawesome.com/c9f5871d83.js" crossorigin="anonymous"></script>
+<style>
+    
+</style>
+<head>
+  <link type="text/css" rel="stylesheet" href="{% static 'shop/css/main.css' %}"/>
+  <link type="text/css" rel="stylesheet" href="{% static 'shop/css/style.css' %}"/>
+  <link type="text/css" rel="stylesheet" href="{% static 'shop/css/bootstrap.min.css' %}"/>
+  <link type="text/css" rel="stylesheet" href="{% static 'shop/css/nouislider.min.css' %}"/>
+  <link type="text/css" rel="stylesheet" href="{% static 'shop/css/slick-theme.css' %}"/>
+  <link type="text/css" rel="stylesheet" href="{% static 'shop/css/slick.css' %}"/>
+  <link rel="stylesheet" href="{% static 'ecommerce/css/font-awesome.min.css' %}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    
+<div id="top-header">
+  <div class="container">
+    <ul class="header-links pull-left">
+      <li><a href="https://wa.me/50946928042"><i class="fa fa-whatsapp"></i>+509 4692-8042</a></li>
+      <li><a href="mailto:louisjeanaderson2016@gmail.com"><i class="fa fa-envelope-o"></i> louisjeananderson2016@gmail.com</a></li>
+      <li><a href="https://maps.app.goo.gl/kUVfYKpKLh77Gb2c7"><i class="fa fa-map-marker"></i> Fontamara27, Rue St.Michel.prolonger, #52Bis</a></li>
+    </ul>
+    </div> 
+    </div>
+
+<div id="header">
+  <!-- container -->
+  <div class="container">
+    <!-- row -->
+    <div class="row">
+<div class="col-md-3">
+  <div class="header-logo">
+    <a href="{% url 'home' %}" class="logo">
+      <img src="{% static 'shop/img/logo.png' %}" alt="Logo">
+    </a>
+  </div>
+</div>
+
+
+<section class="vh-100">
+    <form method="post" action="/login">
+        {% csrf_token %}
+    <div class="container-fluid h-custom">
+
+      
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-md-9 col-lg-6 col-xl-5">
+          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+            class="img-fluid" alt="Sample image">
+        </div>
+        <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+            <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+              <p class="lead fw-normal mb-0 me-3">Connectez-vous avec</p>
+              
+              <button type="button" class="btn btn-primary btn-floating mx-1">
+                <a href="{% url 'socialaccount_connections' %}" class="text-white me-4">
+                  <i class="fab fa-facebook-f"></i>
+              </button>
+              <button type="button" class="btn btn-primary btn-floating mx-1">
+                <a href="{% url 'socialaccount_connections' %}" class="text-white me-4">
+                    <i class="fab fa-google"></i>
+              </button>
+              <button type="button" class="btn btn-primary btn-floating mx-1">
+              <a href="#" class="text-white me-4">
+                <i class="fab fa-twitter"></i>
+              </a>
+            </button>
+            </div>
+            <div class="divider d-flex align-items-center my-4">
+              <p class="text-center fw-bold mx-3 mb-0">Ou</p>
+            </div>
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+                <label for="username">Nom</label>
+                <input type="text" name="username" id="username" placeholder="Entrez votre username" required>
+            </div>
+            <!-- Password input -->
+            <div class="form-outline mb-3">
+                <label for="password">Mots de passe</label>
+                <input type="password" name="password" id="password" placeholder="Entrez votre password" required>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+              <!-- Checkbox -->
+              <div class="form-check mb-0">
+                <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
+                <label class="form-check-label" for="id_remember_me">
+                  Souvenez-vous de moi
+                </label>
+              </div>
+              <a href="/password_reset" class="text-body"><p>Mots de passe oublié?</p></a>
+            </div>
+            <div class="text-center text-lg-start mt-4 pt-2">
+              <button type="submit" class="btn btn-primary btn-lg"
+                style="padding-left: 2.5rem; padding-right: 2.5rem;">Connecter</button>
+              <p class="small fw-bold mt-2 pt-1 mb-0">Pas encore de compte? <a href="/register"
+                  class="link-danger">S'inscrire</a></p>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
+      <!-- Copyright -->
+      <div class="text-white mb-3 mb-md-0">
+        Copyright © 2023. All rights reserved<a href="mailto:louisjeanaderson2016@gmail.com" target="_blank"><p>@Sage</p></a>
+      </div>
+      <!-- Right -->
+      <div>
+        <a href="#!" class="text-white me-4">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="#!" class="text-white me-4">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="{% url 'socialaccount_connections' %}" class="text-white me-4">
+          <i class="fab fa-google"></i>
+        </a>
+        <a href="#!" class="text-white">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+</form>
+
+
+{% endblock %}

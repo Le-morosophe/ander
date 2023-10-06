@@ -1,0 +1,47 @@
+
+{% block content %}
+<div class="row">
+       
+    <div class="col-md-12">
+        
+    </div>
+</div>
+
+<div class="row">
+    <div id="panier"></div>
+    {% for véhicule in véhicule %}
+    <div class="col-md-3">
+        <div class="card">
+            <img id="image{{ product.id }}" src="{{ véhicule.image }}" alt="" class="card-ing-top">
+            <div class="card-body">
+                <div  class="card-title">{{ véhicule.name }}</div>
+                <div  style="color: orange" class="card-text">{{ véhicule.price }} HTG</div>
+                <a href="{{ véhicule.id }}" class="btn btn-warning">Voir</a>
+                <button  class="btn btn-outline-secondary add-btn update-panier" data-product={{véhicule.pk}} data-action="add">Ajouter</button>
+                
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="row mt-3">
+    <div class="col-md-3 offset-md-4">
+        <ul class="pagination">
+            {% if véhicule.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ véhicule.previous_page_number }}">Precedent</a>
+                </li>
+            {% endif %}    
+            <li class="page-item active">
+                <a class="page-link" href="?page={{ véhicule.number }}">{{ véhicule.number }}</a>
+            </li>
+            {% if véhicule.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ véhicule.next_page_number }}">Suivant</a>
+                </li>
+            {% endif %} 
+        </ul>
+    </div>
+</div>
+{% endblock %}

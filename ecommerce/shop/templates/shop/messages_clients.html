@@ -1,0 +1,14 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+  <h1>Messages des clients</h1>
+  <ul>
+    {% for message in messages %}
+      <li>
+        <strong>Nom :</strong> {{ message.name }}<br>
+        <strong>Email :</strong> {{ message.email }}<br>
+        <strong>Message :</strong> {{ message.message }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

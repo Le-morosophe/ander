@@ -1,0 +1,38 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+<h1>Contactez-nous</h1>
+  <p>N'hésitez pas à nous contacter pour toute question, demande d'assistance ou autre besoin. Nous sommes là pour vous aider.</p>
+  
+  <h2>Informations de contact</h2>
+  <ul>
+    <li>Téléphone : 46928042/42309514</li>
+    <li>Email : louisjeananderson2016@gmail.com </li>
+    <li>Adresse : fontamara 27, rue st.michel.prol.</li>
+  </ul>
+  
+  <h2>Formulaire de contact</h2>
+  <p>Vous pouvez également nous envoyer un message en utilisant le formulaire de contact ci-dessous :</p>
+  <form action="{% url 'contact_success' %}" method="POST">
+    {% csrf_token %}
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name"><br>
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email"><br>
+    <label for="message">Message:</label>
+    <textarea name="message" id="message"></textarea><br>
+    <input type="submit" value="Send">
+
+  </form>
+  
+  <h2>Horaires d'ouverture</h2>
+  <p>Nos heures d'ouverture sont les suivantes :</p>
+  <ul>
+    <li>Lundi au vendredi : de 9h00 à 19h00</li>
+    <li>Samedi : de 10h00 à 16h00</li>
+    <li>Dimanche : Fermé</li>
+  </ul>
+  
+  <h2>Assistance technique</h2>
+  <p>Si vous avez besoin d'une assistance technique pour un produit spécifique, veuillez nous contacter en fournissant les détails du produit et le problème que vous rencontrez. Notre équipe d'assistance technique se fera un plaisir de vous aider.</p>
+{% endblock %}

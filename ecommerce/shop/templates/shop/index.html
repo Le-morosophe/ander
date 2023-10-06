@@ -1,0 +1,128 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block content %}
+{% if user.is_authenticated %}
+<h3> Bonjour {{ user }} 👋 bienvenue sur LJA Electro</h3>
+{% endif %}
+
+    <div class="row">
+       
+        <div class="col-md-12">
+            
+        </div>
+    </div>
+    
+    <div class="row">
+        <div id="panier"></div>
+        {% for product in product_object %}
+        <div class="col-md-3">
+            <div class="card">
+                <img id="image{{ product.id }}" src="{{ product.image }}" alt="" class="card-ing-top">
+                <div class="card-body">
+                    <div  class="card-title">{{ product.name }}</div>
+                    <div  style="color: orange" class="card-text">{{ product.price }} HTG</div>
+                    <a href="{{ product.id }}" class="btn btn-warning">Voir</a>
+                    <button  class="btn btn-outline-secondary add-btn update-panier" data-product={{product.pk}} data-action="add">Ajouter</button>
+                    
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <div class="row mt-3">
+        <div class="col-md-3 offset-md-4">
+            <ul class="pagination">
+                {% if product_object.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ product_object.previous_page_number }}">Precedent</a>
+                    </li>
+                {% endif %}    
+                <li class="page-item active">
+                    <a class="page-link" href="?page={{ product_object.number }}">{{ product_object.number }}</a>
+                </li>
+                {% if product_object.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ product_object.next_page_number }}">Suivant</a>
+                    </li>
+                {% endif %} 
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+<script>
+    var productBtns = document.getElementsByClassName('update-panier');
+
+for (var i = 0; i < productBtns.length; i++){
+
+    productBtns[i].addEventListener('click', function(){
+
+        var productId = this.dataset.product;
+
+        var action = this.dataset.action;
+
+        if (user === "AnonymousUser"){
+            addCookieArticle(productId, action);
+        }else{
+            updateUserCommande(productId, action);
+        }
+    })
+
+}
+
+
+function addCookieArticle(productId, action){
+    console.log("l'utilisateur n'est pas authentifie");
+
+    if(action == "add"){
+        if(panier[productId] == undefined){
+            panier[productId] = {"qte":1};
+        }else{
+            panier[productId]["qte"] += 1;
+        }
+    }
+
+    if(action == "remove"){
+        panier[productId]["qte"] -= 1;
+        if( panier[productId]["qte"] <= 0){
+            delete panier[productId];
+        }
+    }
+
+
+    document.cookie = "panier=" + JSON.stringify(panier) + ";domain=;path=/";
+
+    console.log(panier);
+    location.reload();
+}
+
+function updateUserCommande(productId, action){
+
+    var url = '/update_article/';
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken
+        },
+        body: JSON.stringify({"product_id": productId, "action": action})
+    })
+
+    .then((response) => {
+        return response.json();
+    })
+
+    .then((data) => {
+        console.log('data', data);
+        location.reload();
+    })
+}
+</script>
+
+{% endblock %}
+
+
+

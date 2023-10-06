@@ -1,0 +1,29 @@
+{% extends "shop/base.html" %}
+
+{% block content %}
+<h1>Vos commandes</h1>
+{% for commande in commandes %}
+    <div>
+        <h3>Commande n°{{ commande.id }}</h3>
+        <p>Date de commande : {{ commande.date_commande }}</p>
+        <p>Statut de commande : {{ commande.status }}</p>
+        <p>Client  : {{ commande.client }}</p>
+        <p>Total de commande : {{ commande.total_trans }}</p>
+        <p>Numéro de commande : {{ commande.transaction_id }}</p>
+       
+
+        <h5>Nombres d'articles commande: {{commande.get_panier_article}}</h5>
+        
+        {% for article in commande.commandearticle_set.all %}
+    <p>Produit de commande: {{ article.product }}</p>
+    <p>Quantité: {{ article.quantite }}</p>
+    <p>Prix unitaire: {{ article.product.price }}</p>
+    <p>Total: {{ article.get_total }}</p>
+    <br>
+</div>
+{% endfor %}
+
+{% empty %}
+    <p>Aucune commande disponible</p>
+{% endfor %}
+{% endblock content %}

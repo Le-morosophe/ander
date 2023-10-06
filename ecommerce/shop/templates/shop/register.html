@@ -1,0 +1,150 @@
+{% load static %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+  <script src="https://kit.fontawesome.com/c9f5871d83.js" crossorigin="anonymous"></script>
+<style>
+    
+</style>
+<head>
+  <link type="text/css" rel="stylesheet" href="{% static 'shop/css/main.css' %}"/>
+  <link type="text/css" rel="stylesheet" href="{% static 'shop/css/style.css' %}"/>
+  <link type="text/css" rel="stylesheet" href="{% static 'shop/css/bootstrap.min.css' %}"/>
+  <link type="text/css" rel="stylesheet" href="{% static 'shop/css/nouislider.min.css' %}"/>
+  <link type="text/css" rel="stylesheet" href="{% static 'shop/css/slick-theme.css' %}"/>
+  <link type="text/css" rel="stylesheet" href="{% static 'shop/css/slick.css' %}"/>
+  <link rel="stylesheet" href="{% static 'ecommerce/css/font-awesome.min.css' %}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    <div id="top-header">
+      <div class="container">
+        <ul class="header-links pull-left">
+          <li><a href="https://wa.me/50946928042"><i class="fa fa-whatsapp"></i>+509 4692-8042</a></li>
+          <li><a href="mailto:louisjeanaderson2016@gmail.com"><i class="fa fa-envelope-o"></i> louisjeananderson2016@gmail.com</a></li>
+          <li><a href="https://maps.app.goo.gl/kUVfYKpKLh77Gb2c7"><i class="fa fa-map-marker"></i> Fontamara27, Rue St.Michel.prolonger, #52Bis</a></li>
+        </ul>
+        </div> 
+        </div>
+
+
+    <div id="header">
+      <!-- container -->
+      <div class="container">
+        <!-- row -->
+        <div class="row">
+    <div class="col-md-3">
+      <div class="header-logo">
+        <a href="{% url 'home' %}" class="logo">
+          <img src="{% static 'shop/img/logo.png' %}" alt="Logo">
+        </a>
+      </div>
+    </div>
+
+{% block content %}
+
+{% for message in messages %}
+<span style="color: red;"><strong>{{ message }}</strong></span>
+{% endfor %}
+
+<form method="post" action="/register">
+    {% csrf_token %}
+    
+    <section class="vh-100" style="background-color: #eee;">
+        <div class="container h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-12 col-xl-11">
+              <div class="card text-black" style="border-radius: 25px;">
+                <div class="card-body p-md-5">
+                  <div class="row justify-content-center">
+                    <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+      
+                      <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">S'inscrire</p>
+      
+                      <form class="mx-1 mx-md-4">
+      
+                        <div class="d-flex flex-row align-items-center mb-4">
+                          <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                          <div class="form-outline flex-fill mb-0">
+                            <input  name="username" type="text" id="username" class="form-control" placeholder="Entrez votre username"  required />
+                            <label class="form-label" for="username">Votre pseudo</label>
+                          </div>
+                        </div>
+
+                        <div class="d-flex flex-row align-items-center mb-4">
+                            <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                            <div class="form-outline flex-fill mb-0">
+                              <input  name="firstname" type="text" id="firstname" class="form-control" placeholder="Entrez votre firstname"  required />
+                              <label class="form-label" for="firstname">Votre nom</label>
+                            </div>
+                          </div>
+
+                          <div class="d-flex flex-row align-items-center mb-4">
+                            <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                            <div class="form-outline flex-fill mb-0">
+                              <input  name="lastname" type="text" id="lastname" class="form-control" placeholder="Entrez votre lastname"  required />
+                              <label class="form-label" for="lastname">Votre prénom</label>
+                            </div>
+                          </div>
+      
+                        <div class="d-flex flex-row align-items-center mb-4">
+                          <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                          <div class="form-outline flex-fill mb-0">
+                            <input  name="email" type="email" id="email" class="form-control" placeholder="Entrez votre mail"  required />
+                            <label class="form-label" for="email">Votre mail</label>
+                          </div>
+                        </div>
+      
+                        <div class="d-flex flex-row align-items-center mb-4">
+                          <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                          <div class="form-outline flex-fill mb-0">
+                            <input  name="password1" type="password" id="password1" class="form-control" placeholder="Entrez votre password"  required />
+                            <label class="form-label" for="password1">password1</label>
+                          </div>
+                        </div>
+      
+                        <div class="d-flex flex-row align-items-center mb-4">
+                          <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                          <div class="form-outline flex-fill mb-0">
+                            <input name="password2" type="password2" id="password2" class="form-control"  placeholder="Entrez votre password"  required />
+                            <label class="form-label" for="password2">Répéter le mot de passe</label>
+                          </div>
+                        </div>
+      
+                        <div class="form-check d-flex justify-content-center mb-5">
+                          <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
+                          <label class="form-check-label" for="form2Example3">
+                            J'accepte les terms et conditions <a href="{% url 'terms_conditions' %}">Terms & conditions</a>
+                          </label>
+                        </div>
+      
+                        <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                          <button type="submit" class="btn btn-primary btn-lg">S'inscrire</button>
+                        </div>
+      
+                      </form>
+      
+                    </div>
+                    <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+      
+                      <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                        class="img-fluid" alt="Sample image">
+      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+{% for message in messages %}
+<strong>{{ message }}<strong>
+{% endfor %}
+      </section>
+</form>
+
+{% endblock %}
