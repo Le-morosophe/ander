@@ -14,7 +14,7 @@ from pathlib import Path
 import os
 from decouple import config
 import moncash 
-
+import dj_database_url
 gateway = moncash.Moncash(
     
       client_id = "c0edc271025e6de9b40136d960daecc6",
@@ -58,12 +58,11 @@ TEMPLATES_DIRS = os.path.join(BASE_DIR, 'templates')
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-iprnh=u6ka56-sfmb*4_o7)htozh2cha66rb+%qbusrolxdq(x'
-
+SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -168,11 +167,16 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+#DATABASES = {
+   # 'default': {
+    #    'ENGINE': 'django.db.backends.sqlite3',
+       # 'NAME': BASE_DIR / 'db.sqlite3',
+   # }
+#}
+
+
+DATABASE = {
+    'default': dj_database_url.parse(config('DATABASE_URL'))
 }
 
 
