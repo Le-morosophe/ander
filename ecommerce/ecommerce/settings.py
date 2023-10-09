@@ -67,7 +67,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.github',
-    'ecommerce_ecommerce_shop'
+    'shop'
 ]
 
 SITE_ID = 1
