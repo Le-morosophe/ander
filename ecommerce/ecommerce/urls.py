@@ -21,7 +21,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('ecommerce_shop.urls')),
+    path('ecommerce', include('shop.urls')),
     path('accounts/', include('allauth.urls')),
      
 ]
