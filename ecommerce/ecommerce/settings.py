@@ -67,7 +67,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.github',
-    'shop'
+    'ecommerce.shop'
 ]
 
 SITE_ID = 1
@@ -125,7 +125,7 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
 ]
 
-ROOT_URLCONF = 'ecommerce.urls'
+ROOT_URLCONF = 'ecommerce.ecommerce.urls'
 
 
 TEMPLATES = [
@@ -147,7 +147,7 @@ TEMPLATES = [
 
 ]
 
-WSGI_APPLICATION = 'ecommerce.wsgi.application'
+WSGI_APPLICATION = 'ecommerce.ecommerce.wsgi.application'
 
 
 # Database
