@@ -13,23 +13,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 from decouple import config
-import moncash 
+
 import dj_database_url
-gateway = moncash.Moncash(
-    
-      client_id = "c0edc271025e6de9b40136d960daecc6",
-      client_secret = "oHrr4tbnB1PH0uz6VQNUveh10Gfedj1V5GGwRu5mWsQVPQbich0P22zyVRrwPSuf",
-      environment=moncash.environment.Sandbox
-)
 
-try:
-    get_paid_url = gateway.payment.create(amount=8000, reference=17)
-except moncash.exceptions.MoncashError:
-    get_paid_url = None
-    print("Unexpected error...")
-    
-
-print(get_paid_url)
 
 # TODO: redirect the user to get_paid_url
 
@@ -175,7 +161,7 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 #}
 
 
-DATABASE = {
+DATABASES = {
     'default': dj_database_url.parse(config('DATABASE_URL'))
 }
 

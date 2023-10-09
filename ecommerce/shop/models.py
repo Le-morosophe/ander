@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models.fields.related import ForeignKey
 from django.contrib.auth import get_user_model
-import moncashify
+
 from django.utils import timezone
 from django.db.models.signals import post_save
 from django.dispatch import receiver
