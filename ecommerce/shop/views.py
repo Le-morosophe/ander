@@ -13,7 +13,7 @@ from django.core.paginator import Paginator
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.core.mail import send_mail
-from ecommerce import settings
+from ecommerce.ecommerce import settings
 from django.contrib.auth.views import PasswordResetView
 from .utils import send_email_with_html_body
 from django.template.loader import render_to_string
