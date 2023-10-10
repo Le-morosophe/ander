@@ -1,6 +1,6 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
-from shop.views import index, detail,  logi, register, logOut, MyPasswordResetView, confirm_account, confirm_account_success, confirm_account_failed
+from ecommerce.shop.views import index, detail,  logi, register, logOut, MyPasswordResetView, confirm_account, confirm_account_success, confirm_account_failed
 from django.urls import reverse
 from . import views 
 from .views import vos_commandes,  mon_compte,  category_products, contact_form_submit
