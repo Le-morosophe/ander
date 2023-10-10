@@ -125,7 +125,7 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
 ]
 
-ROOT_URLCONF = 'ecommerce.urls'
+ROOT_URLCONF = 'ecommerce.ecommerce.urls'
 
 
 TEMPLATES = [
