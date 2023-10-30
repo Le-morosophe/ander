@@ -1,97 +1,234 @@
+
 {% extends 'shop/base.html' %}
-
+{% load static %}
 {% block content %}
-
-<div class="row">
-    <div class="col-md-6">
-        <div>
-            <img src="{{ product.image }}" width="500px" height="500px">
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 col-md-push-2">
+                <div id="product-main-img">
+                    <div class="product-preview">
+                        <img src="{{ product.image }}" alt="">
+                    </div>
+                    <!-- Ajoutez les autres images du produit ici -->
+                </div>
+            </div>
+            <div class="col-md-2 col-md-pull-5">
+                <div id="product-imgs">
+                    <div class="product-preview">
+                        <img src="{{ product.image }}" alt="">
+                    </div>
+                    <!-- Ajoutez les autres images du produit ici -->
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="product-details">
+                    <h2 class="product-name">{{ product.name }}</h2>
+                    <div>
+                        <div class="product-rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                        <a class="review-link" href="#">10 Review(s) | Add your review</a>
+                    </div>
+                    <div>
+                        <h3 class="product-price">{{ product.price }} HTG <del class="product-old-price">{{ product.old_price }}</del></h3>
+                        <span class="product-available">{{ product.digital }}</span>
+                        <p>{{ product.description }}</p>
+                    </div>
+                    <div class="product-options">
+                        <label>
+                            Taille
+                            <select class="input-select">
+                                <option value="0">X</option>
+                                <option value="1">16GB</option>
+                                <option value="2">32GB</option>
+                                <option value="3">64GB</option>
+                                <option value="3">128GB</option>
+                                <option value="3">256GB</option>
+                                <option value="3">500GB</option>
+                                <option value="4">125CC</option>
+                                <option value="5">150CC</option>
+                            </select>
+                        </label>
+                        <label>
+                            Couleur
+                            <select class="input-select">
+                                <option value="0">Rouge</option>
+                                <option value="1">Blanc</option>
+                                <option value="2">Gris</option>
+                                <option value="3">Bleu</option>
+                                <option value="4">Noir</option>
+                                <option value="5">Jaune</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="add-to-cart">
+                        <div class="qty-label">
+                            <p class="quantite">{{article.quantite}}</p>
+                            Qte
+                            <p class="quantite">{{article.quantite}}</p>
+                            <div class="input-number">
+                                <input type="number" id="quantite-input"> 
+                                <span class="qty-up chg-quantite update-panier" data-product="{{ product.pk }}" data-action="add">+</span>
+                                <span class="qty-down chg-quantite update-panier" data-product="{{ product.pk }}" data-action="remove">-</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart-btn add-btn update-panier" data-product="{{ product.pk }}" data-action="add"><i class="fa fa-shopping-cart"></i>Ajouter</button>
+                    </div>
+                    <ul class="product-btns">
+                        <li><a href="#"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
+                        <li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li>
+                    </ul>
+                    <ul class="product-links">
+                        <li>Category:</li>
+                        <li><a href="{{ product.category }}">{{ product.category }}</a></li>
+                        <li><a href="#">Accessories</a></li>
+                    </ul>
+                    <ul class="product-links">
+                        <li>Share:</li>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="#"><i class="fa fa-envelope"></i></a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="col-md-6">
-        <div class="text-warning display-3">
-            {{ product.name }}
+</div>
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">  
+                <div id="product-tab">  
+                     
+                    <ul class="tab-nav">  
+                        <li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
+                        <li><a data-toggle="tab" href=" #tab2">Details</a></li>
+                        <li><a data-toggle="{% url 'submit_review' %}" href="{% url 'submit_review' %}">Avis ({{ reviews.product }})</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="tab1" class="tab-pane fade in active">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                    {{ product.description }} 
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab2" class="tab-pane fade in">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                    {{ product.description }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="tab3" class="tab-pane fade in">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div id="reviews">
+                                        <ul class="reviews">
+                                            {% for review in reviews %}
+                                            <li>
+                                                <div class="review-heading">
+                                                    <h5 class="name">{{ review.user.username }}</h5>
+                                                    <p class="date">{{ review.date }}</p>
+                                                    <div class="review-rating">
+                                                        {% for _ in review.rating %}
+                                                        <i class="fa fa-star"></i>
+                                                        {% endfor %}
+                                                        {% for _ in review.empty_rating %}
+                                                        <i class="fa fa-star-o empty"></i>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                                <div class="review-body">
+                                                    <p>{{ review.comment }}</p>
+                                                </div>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                        <ul class="reviews-pagination">
+                                            <li class="active">1</li>
+                                            <li><a href="#">2</a></li>
+                                            <li><a href="#">3</a></li>
+                                            <li><a href="#">4</a></li>
+                                            <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    
+                            </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="text-danger">
-         Prix: {{ product.price }} HTG
-        </div>
-        <div>
-            {{ product.description }}
-        </div> 
-        <button  class="btn btn-warning add-btn update-panier" data-product={{product.pk}} data-action="add">Ajouter</button>
     </div>
 </div>
 {% endblock %}
-
 {% block js %}
-
 <script>
     var productBtns = document.getElementsByClassName('update-panier');
-
-for (var i = 0; i < productBtns.length; i++){
-
-    productBtns[i].addEventListener('click', function(){
-
-        var productId = this.dataset.product;
-
-        var action = this.dataset.action;
-
-        if (user === "AnonymousUser"){
-            addCookieArticle(productId, action);
-        }else{
-            updateUserCommande(productId, action);
-        }
-    })
-
-}
-
-
-function addCookieArticle(productId, action){
-    console.log("l'utilisateur n'est pas authentifie");
-
-    if(action == "add"){
-        if(panier[productId] == undefined){
-            panier[productId] = {"qte":1};
-        }else{
-            panier[productId]["qte"] += 1;
-        }
+    var panier = {}; // Ajoutez cette ligne pour définir la variable panier
+    var user = "{{ user.username }}"; // Ajoutez cette ligne pour définir la variable user
+    var csrftoken = "{{ csrf_token }}"; // Ajoutez cette ligne pour définir la variable csrftoken
+    for (var i = 0; i < productBtns.length; i++){
+        productBtns[i].addEventListener('click', function(){
+            var productId = this.dataset.product;
+            var action = this.dataset.action;
+            if (user === "AnonymousUser"){
+                addCookieArticle(productId, action);
+            }else{
+                updateUserCommande(productId, action);
+            }
+        })
     }
-
-    if(action == "remove"){
-        panier[productId]["qte"] -= 1;
-        if( panier[productId]["qte"] <= 0){
-            delete panier[productId];
+    function addCookieArticle(productId, action) {
+        console.log("l'utilisateur n'est pas authentifié");
+        var quantiteInput = document.getElementById('quantite-input');
+        var quantite = parseInt(quantiteInput.value);
+        if (action == "add") {
+            if (panier[productId] == undefined) {
+                panier[productId] = { "qte": 1 };
+            } else {
+                panier[productId]["qte"] += 1;
+            }
         }
-    }
-
-
-    document.cookie = "panier=" + JSON.stringify(panier) + ";domain=;path=/";
-
-    console.log(panier);
-    location.reload();
-}
-
-function updateUserCommande(productId, action){
-
-    var url = '/update_article/';
-
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': csrftoken
-        },
-        body: JSON.stringify({"product_id": productId, "action": action})
-    })
-
-    .then((response) => {
-        return response.json();
-    })
-
-    .then((data) => {
-        console.log('data', data);
+        if (action == "remove") {
+            panier[productId]["qte"] -= 1;
+            if (panier[productId]["qte"] <= 0) {
+                delete panier[productId];
+            }
+        }
+        document.cookie = "panier=" + JSON.stringify(panier) + ";domain=;path=/"; // Utilisez "panier" comme nom de cookie
+        console.log(panier);
         location.reload();
-    })
-}
+    }
+    function updateUserCommande(productId, action) {
+        var url = '/update_article/';
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken
+            },
+            body: JSON.stringify({ "product_id": productId, "action": action })
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                console.log('data', data);
+                location.reload();
+            })
+    }
 </script>
 {% endblock %}
